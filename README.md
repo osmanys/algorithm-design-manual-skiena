@@ -1,2 +1,2 @@
 # algorithm-design-manual-skiena
-The Algorithm Design Manual solutions
+The Algorithm Design Manual Steven S. Skiena solutions
