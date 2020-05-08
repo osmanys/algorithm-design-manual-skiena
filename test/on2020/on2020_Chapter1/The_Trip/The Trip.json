@@ -1,0 +1,44 @@
+{
+  "name" : "The Trip",
+  "testType" : "SINGLE",
+  "input" : {
+    "type" : "STANDARD",
+    "fileName" : "input.txt"
+  },
+  "output" : {
+    "type" : "STANDARD",
+    "fileName" : "output.txt"
+  },
+  "tests" : [ {
+    "input" : "3\n10.00\n20.00\n30.00\n4\n15.00\n15.01\n3.00\n3.01\n0",
+    "output" : "$10.00\n$11.99",
+    "index" : 0,
+    "active" : true
+  }, {
+    "input" : "3\n10.00\n20.00\n30.00\n4\n15.00\n15.01\n3.00\n3.01\n5\n5000.00\n11.11\n11.11\n11.11\n11.11\n3\n0.01\n0.03\n0.03\n4\n25.00\n25.00\n25.00\n28.00\n3\n10.01\n15.25\n18.96\n4\n25.03\n25.00\n25.00\n25.00\n21 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.01 \n0.03 \n12 \n123.12 \n6.13 \n9.44 \n89.08 \n278.78 \n223.78 \n78.45 \n912.89 \n554.76 \n547.57 \n1781.89 \n907.07 \n0",
+    "output" : "$10.00\n$11.99\n$3991.11\n$0.01\n$2.25\n$4.73\n$0.02\n$0.01\n$2407.09",
+    "index" : 1,
+    "active" : true
+  }, {
+    "input" : "3\n10.01\n15.25\n18.96\n0",
+    "output" : "$4.73",
+    "index" : 2,
+    "active" : true
+  } ],
+  "location" : "src/main",
+  "vmArgs" : "-Xmx1536M",
+  "mainClass" : "Main",
+  "taskClass" : "on2020.on2020_Chapter1.The_Trip.TheTrip",
+  "checkerClass" : "net.egork.chelper.checkers.TokenChecker",
+  "checkerParameters" : "",
+  "testClasses" : [ ],
+  "date" : "2020",
+  "contestName" : "Chapter1",
+  "truncate" : true,
+  "inputClass" : "net.egork.io.InputReader",
+  "outputClass" : "net.egork.io.OutputWriter",
+  "includeLocale" : false,
+  "failOnOverflow" : false,
+  "interactive" : false,
+  "interactor" : "net.egork.chelper.tester.Interactor"
+}
