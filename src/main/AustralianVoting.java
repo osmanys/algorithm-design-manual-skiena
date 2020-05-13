@@ -8,33 +8,28 @@ import java.util.Scanner;
 
 public class AustralianVoting {
     public void solve(int testNumber, InputReader in, OutputWriter out) {
-        int min, c, zeros, n, tc = in.readInt();
-        int[] d;
+        int imax, max, min, c, zeros, n, tc = in.readInt();
+        int[] d, idata;
         ArrayList<Integer> minList;
         ArrayList<Integer>[] ballots;
         String line;
         String[] names;
         ArrayList<int[]> data;
-        Scanner sc;
         while (tc > 0) {
             n = in.readInt();
+            imax = -1;
             names = new String[n];
             for (int i = 0; i < n; i++)
                 names[i] = in.readLine();
             data = new ArrayList<>();
-            while (in.peek() != 10 && in.peek() != -1) {
-                line = in.readLine();
-                sc = new Scanner(line);
-                d = new int[n];
-                for (int i = 0; i < n; i++)
-                    d[i] = sc.nextInt() - 1;
-                data.add(d);
-            }
+            while (in.peek() != 10 && in.peek() != -1)
+                data.add(in.readIntArray(n));
             ballots = new ArrayList[n];
             for (int i = 0; i < n; i++)
                 ballots[i] = new ArrayList<>();
+            idata = new int[data.size()];
             for(int i = 0; i < data.size(); i++)
-                ballots[data.get(i)[0]].add(i);
+                ballots[data.get(i)[0] - 1].add(i);
             zeros = 0;
             minList = new ArrayList<>();
             min = Integer.MAX_VALUE;
@@ -50,13 +45,14 @@ public class AustralianVoting {
                 else if(ballots[i].size() == min)
                     minList.add(i);
             }
-            while (zeros + minList.size() < n) {
+            while (imax == -1 && zeros + minList.size() < n) {
                 for (int del : minList) {
                     for (Integer b : ballots[del]) {
-                        for(int i = 0; i < n; i++) {
-                            c = data.get(b)[i];
-                            if(c != del && ballots[c].size() > 0) {
+                        for(int i = idata[b] + 1; i < n; i++) {
+                            c = data.get(b)[i] - 1;
+                            if(ballots[c].size() > 0) {
                                 ballots[c].add(b);
+                                idata[b] = i;
                                 break;
                             }
                         }
@@ -76,12 +72,20 @@ public class AustralianVoting {
                     }
                     else if(ballots[i].size() == min)
                         minList.add(i);
+                    if(ballots[i].size() > data.size() / 2) {
+                        imax = i;
+                        break;
+                    }
                 }
             }
-            for (int i = 0; i < n; i++) {
-                if(ballots[i].size() > 0)
-                    out.printLine(names[i]);
+            if(imax == -1) {
+                for (int i = 0; i < n; i++) {
+                    if (ballots[i].size() > 0)
+                        out.printLine(names[i]);
+                }
             }
+            else
+                out.printLine(names[imax]);
             tc--;
             if(tc > 0)
                 out.printLine();
